@@ -61,7 +61,7 @@ class BattleViewController: UIViewController {
         TechDraUtil.playSE(fileName: "SE_attack")
         
         enemy.currentHP = enemy.currentHP - player.attackPower
-        enemyHPBar.setProgress(enemy.currentHP, animated: true)
+        enemyHPBar.setProgress(enemy.currentHP / enemy.maxHP, animated: true)
         
         if enemy.currentHP < 0 {
             TechDraUtil.animateVanish(enemyImageView)
@@ -74,6 +74,8 @@ class BattleViewController: UIViewController {
         TechDraUtil.stopBGM()
         
         attackBotton.isHidden = true
+        
+        enemyAttackTimer.invalidate()
         
         let finishedMessage: String
         if isPleyerWin{
